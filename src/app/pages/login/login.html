@@ -1,0 +1,54 @@
+<article class="login-container">
+  <section class="login-card">
+
+    <div class="login-title-container">
+      <img src="images/logo_i_notes.svg" alt="logo">
+      <h2 class="login-form-email">Welcome to Note</h2>
+      <div class="login-form-message">Please log in to continue</div>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+      <section class="email-container">
+        <label for="email">Email Address</label>
+        <input id="email" type="email" class="input-email" placeholder="email@example.com" formControlName="email">
+
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+          @if (loginForm.get('email')?.errors?.['required']) {
+            <div class="error-message">Email is necessary.</div>
+          }
+        }
+      </section>
+
+      <section class="password-container">
+        <label for="password">Password</label>
+        <div class="password-input-container">
+          <input [type]="showPassword ? 'text' : 'password'" id="password" class="input-password"
+                 formControlName="password">
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+            {{ showPassword ? '🙈' : '👁️' }}
+          </button>
+        </div>
+        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+          @if (loginForm.get('password')?.errors?.['required']) {
+            <div class="error-message">Password is necessary.</div>
+          }
+        }
+      </section>
+
+      <section class="form-actions">
+        <button type="submit" class="login-button" [disabled]="loginForm.invalid">Log In</button>
+      </section>
+
+      <hr class="form-divider">
+      <div class="form-alt-text">Or log in with:</div>
+      <button class="google-button">G Google</button>
+      <hr class="form-divider">
+
+      <div class="form-alt-text">No account yet?
+        <a class="redirect-register" (click)="goRegister()">Sign Up</a>
+      </div>
+
+    </form>
+  </section>
+</article>
