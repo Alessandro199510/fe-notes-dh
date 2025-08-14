@@ -1,0 +1,127 @@
+.note-form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  gap: 1rem;
+  width: 60rem;
+  height: 100%;
+}
+
+.error-message {
+  color: var(--red-500);
+  margin: 0.5rem 0;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.input-title {
+  font-size: xx-large;
+  font-weight: bold;
+  border: none;
+  color: var(--neutral-950);
+  width: 100%;
+}
+
+.input-title::placeholder {
+  color: var(--neutral-950);
+}
+
+.input-title:focus {
+  outline: none;
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.data-tags {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.input-tags {
+  width: 80%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: none;
+  font-size: large;
+}
+
+.input-tags:focus {
+  outline: 1px solid var(--neutral-900);
+}
+
+.input-tags::placeholder {
+  color: var(--neutral-400);
+}
+
+.data-updated {
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+  align-items: center;
+}
+
+.label-updated-at {
+  color: var(--neutral-400);
+  font-size: large;
+}
+
+.form-divider {
+  margin: 1.5rem 0;
+  border: none;
+  border-bottom: 1px solid var(--neutral-200);
+  width: 100%;
+}
+
+.textarea-content {
+  width: 100%;
+  height: 20rem;
+  border: none;
+  font-size: large;
+  resize: vertical;
+}
+
+.textarea-content::placeholder {
+  color: var(--neutral-950);
+}
+
+.textarea-content:focus {
+  outline: none;
+}
+
+.form-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.button-save {
+  background-color: var(--blue-500);
+  color: var(--neutral-0);
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+}
+
+.button-save:disabled {
+  background-color: var(--neutral-100);
+  color: var(--neutral-950);
+  cursor: not-allowed;
+}
+
+.button-cancel {
+  background-color: var(--neutral-200);
+  color: var(--neutral-950);
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+}

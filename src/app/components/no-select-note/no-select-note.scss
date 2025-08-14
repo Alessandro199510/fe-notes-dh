@@ -1,0 +1,25 @@
+.no-select-note {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: calc(100vw - 20rem);
+  gap: 2rem;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  img {
+    width: 20rem;
+    opacity: 0.50;
+    filter: invert(0.5);
+  }
+}
+
+.my-notes-text {
+  text-align: center;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--neutral-300);
+}

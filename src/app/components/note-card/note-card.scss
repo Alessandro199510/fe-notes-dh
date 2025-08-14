@@ -1,0 +1,28 @@
+.note-card{
+  cursor: pointer;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--neutral-200);
+  gap: 0.75rem;
+  transition: transform 200ms;
+
+  &:hover {
+    background-color: var(--neutral-100);
+    border-bottom: none;
+    transform: scale(0.9);
+  }
+}
+
+.note-title{
+  font-size: large;
+  font-weight: bold;
+}
+
+.note-tags{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

@@ -1,0 +1,13 @@
+<section class="notes-list-container">
+  <button class="button-create-note">+ Create New Note</button>
+
+  <section class="notes-list">
+    @for (note of notesState$ | ngrxPush; track note) {
+      <note-card [note]="note"></note-card>
+    } @empty {
+      <p>No notes available</p>
+    }
+  </section>
+
+  <button class="button-more-notes" (click)="loadMoreNotes()">More</button>
+</section>

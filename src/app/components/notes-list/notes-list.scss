@@ -1,0 +1,39 @@
+.notes-list-container {
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  gap: 1rem;
+}
+
+.button-create-note {
+  background-color: var(--blue-500);
+  color: var(--neutral-0);
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 15rem);
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  p {
+    margin: auto;
+  }
+}
+
+.button-more-notes {
+  background-color: var(--neutral-0);
+  color: var(--blue-500);
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+
+  &:hover {
+    background-color: var(--blue-500);
+    color: var(--neutral-0);
+  }
+}
+

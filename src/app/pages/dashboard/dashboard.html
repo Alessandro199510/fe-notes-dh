@@ -1,0 +1,36 @@
+<main class="container">
+  <aside class="menu">
+    <img src="images/logo_i_notes.svg" alt="logo">
+    <hr>
+    Tags
+    <ul class="tags-container">
+      @for (item of [1, 2, 3, 4]; track item) {
+        <li>🏷️ Option {{ item }} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias cum cupiditate delectus
+          dolores doloribus dolorum, eaque est incidunt iste iure maiores nisi, odit placeat porro praesentium qui quis,
+          repellendus veritatis.
+        </li>
+      } @empty {
+        <li>There are no items.</li>
+      }
+    </ul>
+  </aside>
+
+
+  <aside class="dashboard-content">
+    <section class="dashboard-content-header">
+      <div>All Note</div>
+      <section class="header-options">
+        <input type="search" name="" id="">
+        <button>⚙</button>
+      </section>
+    </section>
+
+    <section class="dashboard-content-body">
+      <notes-list></notes-list>
+      <note-form></note-form>
+      <section class="note-options-container">
+        note options
+      </section>
+    </section>
+  </aside>
+</main>

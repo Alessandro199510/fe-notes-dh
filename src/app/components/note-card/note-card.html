@@ -1,0 +1,9 @@
+<section class="note-card">
+  <div class="note-title">{{ note?.title }}</div>
+  <div class="note-tags">
+    @for (tag of note?.tags; track tag) {
+      <note-tag [tag]="tag"></note-tag>
+    }
+  </div>
+  <div class="note-date">{{ note?.updatedAt | date:'d MMM y'}}</div>
+</section>
