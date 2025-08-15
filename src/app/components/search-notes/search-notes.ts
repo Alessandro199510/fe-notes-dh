@@ -42,7 +42,7 @@ export class SearchNotes implements OnInit {
   }
 
   public performSearch(query: string): void {
-    this.stateService.dispatchLoadNotes(
+    this.stateService.dispatchSearchNotes(
       {
         page: PaginationEnum.INITIAL_PAGE,
         size: PaginationEnum.PAGE_SIZE,

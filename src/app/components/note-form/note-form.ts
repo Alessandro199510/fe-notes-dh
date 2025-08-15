@@ -132,4 +132,5 @@ export class NoteForm implements OnInit, OnChanges {
   private clearForm(): void {
     this.noteForm.reset();
   }
+
 }

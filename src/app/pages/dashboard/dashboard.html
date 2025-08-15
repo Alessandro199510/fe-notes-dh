@@ -8,15 +8,10 @@
     </ul>
 
     <hr>
-    Tags
-    <ul class="options-container">
-      @for (item of [1, 2, 3, 4]; track item) {
-        <li>🏷️ Option {{ item }}
-        </li>
-      } @empty {
-        <li>There are no items.</li>
-      }
-    </ul>
+    <div class="tags-wrapper">
+      <div class="tags-title">Tags</div>
+      <tags-list></tags-list>
+    </div>
   </aside>
 
 

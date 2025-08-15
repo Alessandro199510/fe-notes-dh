@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {PageResponse} from '../../domain/responses/page.response';
 import {Note} from '../../domain/models/note';
@@ -19,9 +19,25 @@ export class NotesHttpService {
   }
 
   public getNotes(payload: FindNotePayload): Observable<PageResponse<Note>> {
-    return this.http.get<PageResponse<Note>>(
-      `${this.API_URL}?page=${payload.page}&size=${payload.size}&search_query=${payload.search_query}&status=${payload.status}&`,
-      {headers: this.getHeaders()});
+    let params = new HttpParams();
+
+    if (payload.page != null) {
+      params = params.set('page', payload.page.toString());
+    }
+    if (payload.size != null) {
+      params = params.set('size', payload.size.toString());
+    }
+    if (payload.search_query) {
+      params = params.set('search_query', payload.search_query);
+    }
+    if (payload.status) {
+      params = params.set('status', payload.status);
+    }
+
+    return this.http.get<PageResponse<Note>>(this.API_URL, {
+      headers: this.getHeaders(),
+      params: params
+    });
   }
 
   public saveNote(note: Partial<Note>): Observable<Note> {

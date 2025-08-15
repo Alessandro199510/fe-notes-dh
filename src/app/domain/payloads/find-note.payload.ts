@@ -5,4 +5,5 @@ export interface FindNotePayload {
   size: number;
   search_query?: string;
   status?: NotesStatus;
+  tagId?: number;
 }

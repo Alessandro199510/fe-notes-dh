@@ -9,10 +9,11 @@ import {FilterService} from '../../services/local/filter.service';
 import {NotesStatus} from '../../domain/enums/notes-status.enum';
 import {PaginationEnum} from '../../domain/enums/pagination.enum';
 import {StateService} from '../../services/state/state.service';
+import {TagsList} from '../../components/tags-list/tags-list';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NotesList, NoteForm, NoSelectNote, SearchNotes],
+  imports: [NotesList, NoteForm, NoSelectNote, SearchNotes, TagsList],
   templateUrl: './dashboard.html',
   standalone: true,
   styleUrl: './dashboard.scss',
@@ -55,16 +56,17 @@ export class Dashboard implements OnInit {
   }
 
   public setFilter(): void{
+    this.loadNotes(NotesStatus.ARCHIVED);
     this.filterService.setFilterState(NotesStatus.ARCHIVED);
-    this.loadNotes();
   }
 
-  private loadNotes(): void {
+  private loadNotes(status: NotesStatus = NotesStatus.ACTIVE): void {
     this.stateService.dispatchLoadNotes(
       {
         page: PaginationEnum.INITIAL_PAGE,
         size: PaginationEnum.PAGE_SIZE,
-        search_query: ''
+        search_query: '',
+        status: status
       }
     );
   }

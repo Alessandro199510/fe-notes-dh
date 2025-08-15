@@ -19,7 +19,6 @@ export class FilterService {
   }
 
   public setFilterState(state: NotesStatus.ACTIVE | NotesStatus.ARCHIVED | null): void {
-    console.log(state)
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: {status: state},

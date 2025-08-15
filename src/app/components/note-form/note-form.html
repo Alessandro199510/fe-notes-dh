@@ -22,7 +22,7 @@
       <div class="data-updated">
         <div>🕛 Last edited:</div>
         @if (note) {
-          <div class="label-updated-at">{{ note?.updatedAt | date:'d MMM y' }}</div>
+          <div class="label-updated-at">{{ note.updatedAt | date:'d MMM y' }}</div>
         } @else {
           No yet saved
         }
@@ -51,7 +51,7 @@
 
   @if (note) {
     <section class="note-options-container">
-      @if (note?.status == NotesStatus.ACTIVE) {
+      @if (note.status == NotesStatus.ACTIVE) {
         <button (click)="archive()">⬇️ Archive Note</button>
       } @else {
         <button (click)="unarchive()">⬇️ Unarchive Note</button>

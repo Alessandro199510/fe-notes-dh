@@ -1,8 +1,6 @@
 import {initialNotesState, notesAdapter, NotesState} from '../models/notes.state';
 import {Action, ActionReducer, createReducer, on} from '@ngrx/store';
 import {NotesActions} from '../actions/actions';
-import {deletedNote} from '../actions/notes.actions';
-
 
 export const notesReducers: ActionReducer<NotesState, Action> = createReducer(
   initialNotesState,

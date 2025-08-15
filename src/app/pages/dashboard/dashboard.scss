@@ -50,6 +50,17 @@
   }
 }
 
+.tags-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.tags-title {
+  color: var(--neutral-400);
+}
+
 .dashboard-content {
   display: flex;
   flex-direction: column;
@@ -67,7 +78,7 @@
   align-items: center;
   flex-wrap: wrap;
 
-  .title{
+  .title {
     font-size: xx-large;
     margin-left: 1rem;
     font-weight: bold;
