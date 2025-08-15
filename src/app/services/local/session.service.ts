@@ -3,6 +3,7 @@ import {AuthHttpService} from '../http/auth-http.service';
 import {ToastService} from './toast.service';
 import {Router} from '@angular/router';
 import {KeysEnum} from '../../domain/enums/keys.enum';
+import {User} from '../../domain/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -37,14 +38,34 @@ export class SessionService {
   public login(email: string, password: string): void {
     this.authHttpService.login(email, password).subscribe({
       next: (response: { username: string, token: string }): void => {
-        this.saveToken(response.token);
-        this.toastService.showToast(`Welcome ${response.username}!`, 3000);
-        this.router.navigate(['/notes']);
+        this.loginSuccess(response.token, response.username);
       },
       error: (error: Error) => {
         this.toastService.showToast('Login failed: ' + error.message, 5000);
       }
     });
+  }
+
+  public register(username: string, email: string, password: string): void {
+    this.authHttpService.register(username, email, password).subscribe({
+      next: (response: User): void => {
+        this.loginSuccess(response.token, response.username);
+      },
+      error: (error: Error) => {
+        this.toastService.showToast('Register failed: ', 5000);
+      }
+    });
+  }
+
+  public logout(): void {
+    this.clearToken();
+    this.router.navigate(['/auth/login']);
+  }
+
+  private loginSuccess(token: string, username: string): void {
+    this.saveToken(token);
+    this.toastService.showToast(`Welcome ${username}!`, 3000);
+    this.router.navigate(['/notes']);
   }
 
 }

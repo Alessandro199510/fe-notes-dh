@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ToastService} from '../../services/local/toast.service';
 import {Router} from '@angular/router';
@@ -13,7 +13,8 @@ import {SessionService} from '../../services/local/session.service';
   templateUrl: './login.html',
   styleUrl: './login.scss',
   standalone: true,
-  providers: [AuthHttpService, ToastService]
+  providers: [AuthHttpService, ToastService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Login implements OnInit {
 
@@ -25,9 +26,12 @@ export class Login implements OnInit {
 
   public showPassword: boolean;
 
+  private defaultUser: { email: string, password: string };
+
   constructor() {
     this.loginForm = this.formBuilder.group({});
     this.showPassword = false;
+    this.defaultUser = {email: 'ales@email.com', password: 'password'}
   }
 
   public ngOnInit(): void {
@@ -36,8 +40,8 @@ export class Login implements OnInit {
 
   private initForm(): void {
     this.loginForm = this.formBuilder.group({
-      email: ['ales@mail.com', [Validators.required, Validators.email]],
-      password: ['1234', [Validators.required]],
+      email: [this.defaultUser.email, [Validators.required, Validators.email]],
+      password: [this.defaultUser.password, [Validators.required]],
     });
   }
 

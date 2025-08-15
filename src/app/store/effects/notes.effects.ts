@@ -5,7 +5,7 @@ import {catchError, map, mergeMap, Observable, of} from 'rxjs';
 import {PageResponse} from '../../domain/responses/page.response';
 import {Note} from '../../domain/models/note';
 import {NotesActions} from '../actions/actions';
-import {storeNote} from '../actions/notes.actions';
+import {loadMoreNotes} from '../actions/notes.actions';
 
 @Injectable()
 export class NotesEffects {
@@ -21,7 +21,7 @@ export class NotesEffects {
       mergeMap((payload) =>
         this.notesService.getNotes(payload.request).pipe(
           map((pageResponse: PageResponse<Note>) =>
-            NotesActions.storeNotes({pageResponse})
+            NotesActions.setNotes({pageResponse})
           ),
           catchError((error) =>
             of(NotesActions.loadNotesFailure({error}))
@@ -31,6 +31,21 @@ export class NotesEffects {
     )
   );
 
+  loadMoreNotes = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NotesActions.loadMoreNotes),
+      mergeMap((payload) =>
+        this.notesService.getNotes(payload.request).pipe(
+          map((pageResponse: PageResponse<Note>) =>
+            NotesActions.addNotes({pageResponse})
+          ),
+          catchError((error) =>
+            of(NotesActions.loadNotesFailure({error}))
+          )
+        )
+      )
+    )
+  );
 
   saveNote$ = createEffect(() =>
     this.actions$.pipe(
@@ -48,4 +63,19 @@ export class NotesEffects {
     )
   );
 
+  updateNote$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NotesActions.updateNote),
+      mergeMap((action) =>
+        this.notesService.updateNote(action.note).pipe(
+          map((note: Note) =>
+            NotesActions.updatedNote({ note: note })
+          ),
+          catchError((error) =>
+            of(NotesActions.loadNotesFailure({ error }))
+          )
+        )
+      )
+    )
+  );
 }

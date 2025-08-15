@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {NotesActions} from '../../store/actions/actions';
-import {selectNotesState} from '../../store/selectors/notes.selectors';
+import {selectNotesNumberPage, selectNotesState, selectNotesTotalPages} from '../../store/selectors/notes.selectors';
 import {map, Observable} from 'rxjs';
 import {Note} from '../../domain/models/note';
 import {FindNotePayload} from '../../domain/payloads/find-note.payload';
@@ -17,6 +17,10 @@ export class StateService {
     this.store.dispatch(NotesActions.loadNotes({request: request}));
   }
 
+  public dispatchLoadMoreNotes(request: FindNotePayload): void {
+    this.store.dispatch(NotesActions.loadMoreNotes({request: request}));
+  }
+
   public storedNotes(): Observable<Note[]> {
     return this.store.select(selectNotesState).pipe(
       map(state => {
@@ -27,8 +31,19 @@ export class StateService {
     );
   }
 
+  public selectNotesTotalPages(): Observable<number> {
+    return this.store.select(selectNotesTotalPages);
+  }
+
+  public selectNotesNumberPage(): Observable<number> {
+    return this.store.select(selectNotesNumberPage);
+  }
+
   public saveNote(note: Partial<Note>): void {
     this.store.dispatch(NotesActions.saveNote({note}));
   }
 
+  public updateNote(note: Partial<Note>): void {
+    this.store.dispatch(NotesActions.updateNote({note}));
+  }
 }

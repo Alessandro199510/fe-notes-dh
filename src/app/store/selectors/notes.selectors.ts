@@ -12,14 +12,23 @@ export const {
 
 export const selectNotesLoading = createSelector(
   selectNotesState,
-  (state) => state.loading
+  (state: NotesState) => state.loading
 );
 
 export const selectNotesError = createSelector(
   selectNotesState,
-  (state) => state.error
+  (state: NotesState) => state.error
 );
 
 export const selectNoteById = (id: string) =>
   createSelector(selectEntities, (entities) => entities[id]);
 
+export const selectNotesTotalPages = createSelector(
+  selectNotesState,
+  (state: NotesState): number => state.totalPages
+);
+
+export const selectNotesNumberPage = createSelector(
+  selectNotesState,
+  (state: NotesState): number => state.number
+);

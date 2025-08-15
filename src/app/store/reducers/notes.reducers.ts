@@ -1,7 +1,6 @@
 import {initialNotesState, notesAdapter, NotesState} from '../models/notes.state';
 import {Action, ActionReducer, createReducer, on} from '@ngrx/store';
 import {NotesActions} from '../actions/actions';
-import {storeNote} from '../actions/notes.actions';
 
 
 export const notesReducers: ActionReducer<NotesState, Action> = createReducer(
@@ -13,8 +12,19 @@ export const notesReducers: ActionReducer<NotesState, Action> = createReducer(
     error: null,
   })),
 
-  on(NotesActions.storeNotes, (state, {pageResponse}) =>
+  on(NotesActions.addNotes, (state, {pageResponse}) =>
     notesAdapter.addMany(pageResponse.content, {
+      ...state,
+      loading: false,
+      number: pageResponse.number,
+      size: pageResponse.size,
+      totalElements: pageResponse.totalElements,
+      totalPages: pageResponse.totalPages,
+    })
+  ),
+
+  on(NotesActions.setNotes, (state, {pageResponse}) =>
+    notesAdapter.setAll(pageResponse.content, {
       ...state,
       loading: false,
       number: pageResponse.number,
@@ -32,4 +42,11 @@ export const notesReducers: ActionReducer<NotesState, Action> = createReducer(
     })
   ),
 
+  on(NotesActions.updatedNote, (state, {note}) =>
+    notesAdapter.setOne(note, {
+      ...state,
+      loading: false,
+      error: null,
+    })
+  ),
 );

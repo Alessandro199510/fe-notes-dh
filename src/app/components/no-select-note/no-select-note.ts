@@ -1,20 +1,11 @@
-import {Component, Input} from '@angular/core';
-import {Note} from '../../domain/models/note';
-import {NoteTag} from '../note-tag/note-tag';
-import {DatePipe} from '@angular/common';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
   selector: 'no-select-note',
   templateUrl: './no-select-note.html',
   styleUrl: './no-select-note.scss',
-  standalone: true
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NoSelectNote {
-
-  @Input()
-  public note: Note | undefined;
-
-  constructor() {
-    this.note = {} as Note;
-  }
 }

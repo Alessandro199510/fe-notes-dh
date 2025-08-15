@@ -11,7 +11,7 @@
 
       <section class="email-container">
         <label for="email">Email Address</label>
-        <input id="email" type="email" class="input-email" placeholder="email@example.com" formControlName="email">
+        <input id="email" type="email" class="input-form" placeholder="email@example.com" formControlName="email">
 
         @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
           @if (loginForm.get('email')?.errors?.['required']) {

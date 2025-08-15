@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Note} from '../../domain/models/note';
 import {NoteTag} from '../note-tag/note-tag';
 import {DatePipe} from '@angular/common';
@@ -11,7 +11,8 @@ import {DatePipe} from '@angular/common';
   ],
   templateUrl: './note-card.html',
   styleUrl: './note-card.scss',
-  standalone: true
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NoteCard {
 

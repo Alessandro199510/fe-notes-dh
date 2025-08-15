@@ -1,1 +1,73 @@
-<p>register works!</p>
+<article class="register-container">
+  <section class="register-card">
+
+    <div class="register-title-container">
+      <img src="images/logo_i_notes.svg" alt="logo">
+      <h2 class="register-form-email">Create Your Account</h2>
+      <div class="register-form-message">Sign up to start organizing your notes and boost your productivity.</div>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+
+      <section class="email-container">
+        <label for="username">User name</label>
+        <input id="username" type="text" class="input-form" placeholder="User name" formControlName="username">
+
+        @if (registerForm.get('username')?.invalid && registerForm.get('username')?.touched) {
+          @if (registerForm.get('username')?.errors?.['required']) {
+            <div class="error-message">User name is necessary.</div>
+          }
+        }
+      </section>
+
+      <section class="email-container">
+        <label for="email">Email Address</label>
+        <input id="email" type="email" class="input-form" placeholder="email@example.com" formControlName="email">
+
+        @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+          @if (registerForm.get('email')?.errors?.['required']) {
+            <div class="error-message">Email is necessary.</div>
+          }
+        }
+      </section>
+
+      <section class="password-container">
+        <label for="password">Password</label>
+        <div class="password-input-container">
+          <input [type]="showPassword ? 'text' : 'password'" id="password" class="input-password"
+                 formControlName="password">
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+            {{ showPassword ? '🙈' : '👁️' }}
+          </button>
+        </div>
+        @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+          @if (registerForm.get('password')?.errors?.['required']) {
+            <div class="error-message">Password is necessary.</div>
+          }@if (registerForm.get('password')?.errors?.['required']) {
+            <div class="error-message">Password is necessary.</div>
+          }
+          @if (registerForm.get('password')?.errors?.['minlength']) {
+            <div class="error-message">At least 8 characters.</div>
+          }
+        }
+      </section>
+
+      <section class="form-actions">
+        <button type="submit" class="register-button" [disabled]="registerForm.invalid">Log In</button>
+      </section>
+
+      <hr class="form-divider">
+      <div class="form-alt-text">Or log in with:</div>
+      <button class="google-button">G Google</button>
+      <hr class="form-divider">
+
+      <div class="form-alt-text">Already have an account?
+        <a class="redirect-register" (click)="goLogin()">Login</a>
+      </div>
+
+    </form>
+  </section>
+</article>
+<div>
+
+</div>
