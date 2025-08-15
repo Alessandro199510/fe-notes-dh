@@ -1,9 +1,8 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {debounceTime} from 'rxjs';
 import {StateService} from '../../services/state/state.service';
 import {PaginationEnum} from '../../domain/enums/pagination.enum';
-import {NotesStatus} from '../../domain/enums/notes-status.enum';
 
 @Component({
   selector: 'search-notes',
@@ -12,7 +11,8 @@ import {NotesStatus} from '../../domain/enums/notes-status.enum';
   imports: [
     ReactiveFormsModule
   ],
-  standalone: true
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchNotes implements OnInit {
 
@@ -46,8 +46,7 @@ export class SearchNotes implements OnInit {
       {
         page: PaginationEnum.INITIAL_PAGE,
         size: PaginationEnum.PAGE_SIZE,
-        search_query: query,
-        status: NotesStatus.ACTIVE
+        search_query: query
       }
     );
   }

@@ -2,7 +2,7 @@
   <button class="button-create-note" (click)="emitShowForm()">+ Create New Note</button>
 
   <section class="notes-list">
-    @for (note of notesState$ | ngrxPush; track note) {
+    @for (note of notesState$ | ngrxPush; track note?.id) {
       <note-card [note]="note" (click)="emitShowForm(note)"></note-card>
     }
   </section>

@@ -1,9 +1,15 @@
 <main class="container">
   <aside class="menu">
     <img src="images/logo_i_notes.svg" alt="logo">
+
+    <ul class="options-container">
+      <li (click)="removeFilter()">All Notes</li>
+      <li (click)="setFilter()">Archived Notes</li>
+    </ul>
+
     <hr>
     Tags
-    <ul class="tags-container">
+    <ul class="options-container">
       @for (item of [1, 2, 3, 4]; track item) {
         <li>🏷️ Option {{ item }}
         </li>

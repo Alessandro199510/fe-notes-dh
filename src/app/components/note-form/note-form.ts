@@ -13,11 +13,14 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {Note} from '../../domain/models/note';
 import {StateService} from '../../services/state/state.service';
 import {ToastService} from '../../services/local/toast.service';
+import {NotesStatus} from '../../domain/enums/notes-status.enum';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'note-form',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DatePipe
   ],
   templateUrl: './note-form.html',
   styleUrl: './note-form.scss',
@@ -32,7 +35,7 @@ export class NoteForm implements OnInit, OnChanges {
   private formBuilder: FormBuilder = inject(FormBuilder);
   private stateService: StateService = inject(StateService);
   private toastService: ToastService = inject(ToastService);
-
+  protected readonly NotesStatus: typeof NotesStatus = NotesStatus;
   public noteForm!: FormGroup;
 
   @Output()
@@ -92,6 +95,33 @@ export class NoteForm implements OnInit, OnChanges {
       this.toastService.showToast('Note saved successfully!', 3000);
       this.hideForm.emit();
     }
+  }
+
+  public archive(): void {
+    this.stateService.changeStatus({
+      ...this.note,
+      status: NotesStatus.ARCHIVED
+    });
+    this.toastService.showToast('Note archived!', 3000);
+    this.onCancel();
+  }
+
+  public unarchive(): void {
+    this.stateService.changeStatus({
+      ...this.note,
+      status: NotesStatus.ACTIVE
+    });
+    this.toastService.showToast('Note actived!', 3000);
+    this.onCancel();
+  }
+
+  public delete(): void {
+    this.stateService.changeStatus({
+      ...this.note,
+      status: NotesStatus.DELETED,
+    });
+    this.toastService.showToast('Note deleted!', 3000);
+    this.onCancel();
   }
 
   public onCancel(): void {

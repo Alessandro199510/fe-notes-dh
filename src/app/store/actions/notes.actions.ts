@@ -44,6 +44,15 @@ export const storeNote = createAction(
   props<{ note: Note }>()
 );
 
+export const changeStatus = createAction(
+  '[Notes API] Note change status',
+  props<{ note: Partial<Note> }>()
+);
+
+export const deletedNote = createAction(
+  '[Notes API] Note deleted',
+  props<{ note: Note }>()
+);
 
 export const updatedNote = createAction(
   '[Notes API] Note updated Success',

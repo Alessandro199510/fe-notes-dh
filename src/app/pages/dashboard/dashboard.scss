@@ -18,15 +18,16 @@
 
   hr {
     width: 100%;
-    border: 0.5px solid var(--neutral-200);
+    border: none;
+    border-bottom: 0.5px solid var(--neutral-200);
   }
 
   img {
-    margin: 0 auto;
+    margin: 1.5rem auto;
   }
 }
 
-.tags-container {
+.options-container {
   list-style-type: none;
   display: flex;
   flex-direction: column;
@@ -36,9 +37,9 @@
   li {
     cursor: pointer;
     background-color: var(--neutral-0);
-    padding: 0.75rem 0.5rem;
+    padding: 0.75rem 1rem;
     border-radius: 0.25rem;
-
+    font-size: large;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -64,6 +65,7 @@
   border-bottom: 1px solid var(--neutral-200);
   align-self: flex-start;
   align-items: center;
+  flex-wrap: wrap;
 
   .title{
     font-size: xx-large;
@@ -75,6 +77,7 @@
 .header-options {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
 
   button {
     cursor: pointer;

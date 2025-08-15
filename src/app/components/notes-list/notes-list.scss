@@ -1,9 +1,10 @@
 .notes-list-container {
-  width: 20rem;
+  width: 25rem;
   display: flex;
   flex-direction: column;
   padding: 1rem 2rem;
   gap: 1rem;
+  border-right: 1px solid var(--neutral-200);
 }
 
 .button-create-note {

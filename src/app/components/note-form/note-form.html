@@ -1,5 +1,5 @@
 <article class="note-form-container">
-  <form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="noteForm" (ngSubmit)="onSubmit()" class="form">
 
     <section class="title-container">
       <input id="title" type="text" class="input-title" placeholder="Enter title..." formControlName="title">
@@ -15,12 +15,17 @@
 
       <div class="data-tags">
         <label for="tags">🏷️ Tags:</label>
-        <input id="tags" type="text" class="input-tags" formControlName="tags" placeholder="Add tags separated by commas (e.g. Work, Planning)">
+        <input id="tags" type="text" class="input-tags" formControlName="tags"
+               placeholder="Add tags separated by commas (e.g. Work, Planning)">
       </div>
 
       <div class="data-updated">
         <div>🕛 Last edited:</div>
-        <div class="label-updated-at">No yet saved</div>
+        @if (note) {
+          <div class="label-updated-at">{{ note?.updatedAt | date:'d MMM y' }}</div>
+        } @else {
+          No yet saved
+        }
       </div>
 
     </section>
@@ -28,14 +33,13 @@
     <hr class="form-divider">
 
     <section>
-      <textarea id="content" formControlName="content" class="textarea-content" placeholder="Start typing your note here…"></textarea>
+      <textarea id="content" formControlName="content" class="textarea-content"
+                placeholder="Start typing your note here…"></textarea>
 
       @if (noteForm.get('content')?.invalid && noteForm.get('content')?.touched) {
         <div class="error-message">Content is necessary.</div>
       }
-
     </section>
-
 
     <section class="form-actions">
       <button type="submit" class="button-save" [disabled]="noteForm.invalid">Save Note</button>
@@ -44,8 +48,17 @@
     </section>
 
   </form>
+
+  @if (note) {
+    <section class="note-options-container">
+      @if (note?.status == NotesStatus.ACTIVE) {
+        <button (click)="archive()">⬇️ Archive Note</button>
+      } @else {
+        <button (click)="unarchive()">⬇️ Unarchive Note</button>
+      }
+      <button (click)="delete()">🗑️ Delete Note</button>
+    </section>
+  }
+
 </article>
 
-<section class="note-options-container">
-  note options
-</section>

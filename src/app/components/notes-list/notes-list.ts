@@ -40,7 +40,6 @@ export class NotesList implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.loadNotes();
     this.initTotalPagesSubscriptions();
     this.initCurrentPageSubscriptions();
   }
@@ -51,19 +50,7 @@ export class NotesList implements OnInit {
       {
         page: this.page,
         size: PaginationEnum.PAGE_SIZE,
-        search_query: this.searchQuery,
-        status: NotesStatus.ACTIVE
-      }
-    );
-  }
-
-  private loadNotes(): void {
-    this.stateService.dispatchLoadNotes(
-      {
-        page: PaginationEnum.INITIAL_PAGE,
-        size: PaginationEnum.PAGE_SIZE,
-        search_query: this.searchQuery,
-        status: NotesStatus.ACTIVE
+        search_query: this.searchQuery
       }
     );
   }

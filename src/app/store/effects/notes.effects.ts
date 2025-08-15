@@ -1,11 +1,10 @@
 import {inject, Injectable} from '@angular/core';
 import {NotesHttpService} from '../../services/http/notes-http.service';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {catchError, map, mergeMap, Observable, of} from 'rxjs';
+import {catchError, map, mergeMap, of} from 'rxjs';
 import {PageResponse} from '../../domain/responses/page.response';
 import {Note} from '../../domain/models/note';
 import {NotesActions} from '../actions/actions';
-import {loadMoreNotes} from '../actions/notes.actions';
 
 @Injectable()
 export class NotesEffects {
@@ -53,10 +52,10 @@ export class NotesEffects {
       mergeMap((action) =>
         this.notesService.saveNote(action.note).pipe(
           map((note: Note) =>
-            NotesActions.storeNote({ note: note })
+            NotesActions.storeNote({note: note})
           ),
           catchError((error) =>
-            of(NotesActions.loadNotesFailure({ error }))
+            of(NotesActions.loadNotesFailure({error}))
           )
         )
       )
@@ -69,10 +68,26 @@ export class NotesEffects {
       mergeMap((action) =>
         this.notesService.updateNote(action.note).pipe(
           map((note: Note) =>
-            NotesActions.updatedNote({ note: note })
+            NotesActions.updatedNote({note: note})
           ),
           catchError((error) =>
-            of(NotesActions.loadNotesFailure({ error }))
+            of(NotesActions.loadNotesFailure({error}))
+          )
+        )
+      )
+    )
+  );
+
+  deleteNote$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NotesActions.changeStatus),
+      mergeMap((action) =>
+        this.notesService.updateNote(action.note).pipe(
+          map((note: Note) =>
+            NotesActions.deletedNote({note: note})
+          ),
+          catchError((error) =>
+            of(NotesActions.loadNotesFailure({error}))
           )
         )
       )

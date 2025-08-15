@@ -5,6 +5,8 @@ import {selectNotesNumberPage, selectNotesState, selectNotesTotalPages} from '..
 import {map, Observable} from 'rxjs';
 import {Note} from '../../domain/models/note';
 import {FindNotePayload} from '../../domain/payloads/find-note.payload';
+import {NotesStatus} from '../../domain/enums/notes-status.enum';
+import {FilterService} from '../local/filter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +14,15 @@ import {FindNotePayload} from '../../domain/payloads/find-note.payload';
 export class StateService {
 
   private store: Store = inject(Store);
+  private filterService: FilterService = inject(FilterService);
 
   public dispatchLoadNotes(request: FindNotePayload): void {
-    this.store.dispatch(NotesActions.loadNotes({request: request}));
+    this.store.dispatch(NotesActions.loadNotes({
+      request: {
+        ...request,
+        status: this.filterService.getFilterState()
+      }
+    }));
   }
 
   public dispatchLoadMoreNotes(request: FindNotePayload): void {
@@ -45,5 +53,9 @@ export class StateService {
 
   public updateNote(note: Partial<Note>): void {
     this.store.dispatch(NotesActions.updateNote({note}));
+  }
+
+  public changeStatus(note: Partial<Note>): void {
+    this.store.dispatch(NotesActions.changeStatus({note}));
   }
 }
