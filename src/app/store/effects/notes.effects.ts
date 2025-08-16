@@ -4,7 +4,8 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, map, mergeMap, of} from 'rxjs';
 import {PageResponse} from '../../domain/responses/page.response';
 import {Note} from '../../domain/models/note';
-import {NotesActions} from '../actions/actions';
+import {NotesActions, TagsActions} from '../actions/actions';
+import {defaultLoadTagPayload} from '../../domain/payloads/find-tag.payload';
 
 @Injectable()
 export class NotesEffects {
@@ -51,9 +52,10 @@ export class NotesEffects {
       ofType(NotesActions.saveNote),
       mergeMap((action) =>
         this.notesService.saveNote(action.note).pipe(
-          map((note: Note) =>
-            NotesActions.storeNote({note: note})
-          ),
+          mergeMap((note: Note) => [
+            NotesActions.storeNote({note: note}),
+            TagsActions.loadTags({request: defaultLoadTagPayload})
+          ]),
           catchError((error) =>
             of(NotesActions.loadNotesFailure({error}))
           )
@@ -67,9 +69,10 @@ export class NotesEffects {
       ofType(NotesActions.updateNote),
       mergeMap((action) =>
         this.notesService.updateNote(action.note).pipe(
-          map((note: Note) =>
-            NotesActions.updatedNote({note: note})
-          ),
+          mergeMap((note: Note) => [
+            NotesActions.updatedNote({note: note}),
+            TagsActions.loadTags({request: defaultLoadTagPayload})
+          ]),
           catchError((error) =>
             of(NotesActions.loadNotesFailure({error}))
           )

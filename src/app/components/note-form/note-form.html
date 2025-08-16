@@ -14,13 +14,13 @@
     <section class="data-container">
 
       <div class="data-tags">
-        <label for="tags">🏷️ Tags:</label>
+        <label for="tags"><i class="icon">🏷️</i> Tags:</label>
         <input id="tags" type="text" class="input-tags" formControlName="tags"
                placeholder="Add tags separated by commas (e.g. Work, Planning)">
       </div>
 
       <div class="data-updated">
-        <div>🕛 Last edited:</div>
+        <div><i class="icon">🕛</i> Last edited:</div>
         @if (note) {
           <div class="label-updated-at">{{ note.updatedAt | date:'d MMM y' }}</div>
         } @else {
@@ -52,9 +52,9 @@
   @if (note) {
     <section class="note-options-container">
       @if (note.status == NotesStatus.ACTIVE) {
-        <button (click)="archive()">⬇️ Archive Note</button>
+        <button (click)="archive()"><i class="icon">🔐</i> Archive Note</button>
       } @else {
-        <button (click)="unarchive()">⬇️ Unarchive Note</button>
+        <button (click)="unarchive()"><i class="icon">🔐</i> Unarchive Note</button>
       }
       <button (click)="delete()">🗑️ Delete Note</button>
     </section>

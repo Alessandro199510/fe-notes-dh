@@ -1,10 +1,11 @@
 <ul class="tags-container">
   @for (tag of tagsState$ | ngrxPush; track tag?.id) {
-    <li>
-      🏷️ {{ tag?.name }}
+    <li (click)="selectTag(tag)">
+      <i class="icon">🏷️</i> {{ tag?.name }}
     </li>
   }
-  @if (page < maxPage - 1) {
-    <button class="button-more-tags" (click)="loadMoreTags()">More</button>
-  }
+
 </ul>
+@if (page < maxPage - 1) {
+  <button class="button-more-tags" (click)="loadMoreTags()">More</button>
+}

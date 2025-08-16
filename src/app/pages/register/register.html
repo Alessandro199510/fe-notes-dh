@@ -37,13 +37,11 @@
           <input [type]="showPassword ? 'text' : 'password'" id="password" class="input-password"
                  formControlName="password">
           <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
-            {{ showPassword ? '🙈' : '👁️' }}
+            <i class="icon">{{ showPassword ? '🔐' : '👁️' }}</i>
           </button>
         </div>
         @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
           @if (registerForm.get('password')?.errors?.['required']) {
-            <div class="error-message">Password is necessary.</div>
-          }@if (registerForm.get('password')?.errors?.['required']) {
             <div class="error-message">Password is necessary.</div>
           }
           @if (registerForm.get('password')?.errors?.['minlength']) {

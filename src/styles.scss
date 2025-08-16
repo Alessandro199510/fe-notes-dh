@@ -29,7 +29,7 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  font-family: "Arial", sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
 * {
@@ -49,11 +49,11 @@ button {
 
 ::-webkit-scrollbar {
   width: 0.35rem;
-  background-color: var(--neutral-50);
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--neutral-300);
+  background: var(--neutral-100);
   border-radius: 0.25rem;
 }
 
@@ -72,7 +72,7 @@ button {
   align-items: center;
   box-shadow: 0 0.25rem 0.5rem var(--neutral-200);
 
-  button{
+  button {
     position: absolute;
     top: 0;
     right: 1rem;
@@ -81,7 +81,7 @@ button {
     font-size: 2rem;
   }
 
-  .toast-icon{
+  .toast-icon {
     width: 2rem;
     height: 2rem;
     display: flex;
@@ -91,4 +91,9 @@ button {
     background-color: var(--green-500);
     color: var(--neutral-0);
   }
+}
+
+.icon {
+  font-style: normal;
+  filter: grayscale(100%)
 }

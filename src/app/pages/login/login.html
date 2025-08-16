@@ -26,7 +26,7 @@
           <input [type]="showPassword ? 'text' : 'password'" id="password" class="input-password"
                  formControlName="password">
           <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
-            {{ showPassword ? '🙈' : '👁️' }}
+            <i class="icon">{{ showPassword ? '🔐' : '👁️' }}</i>
           </button>
         </div>
         @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {

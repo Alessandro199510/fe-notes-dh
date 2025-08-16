@@ -1,11 +1,11 @@
 .tags-container {
   list-style-type: none;
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  gap: 0.5rem;
+  max-height: 30rem;
+  overflow-y: auto;
 
   li {
+    margin: 0.5rem 0;
     cursor: pointer;
     background-color: var(--neutral-0);
     padding: 0.75rem 1rem;
@@ -23,12 +23,10 @@
 
 .button-more-tags {
   background-color: var(--neutral-0);
-  color: var(--blue-500);
+  color: var(--neutral-700);
   padding: 0.5rem 1.5rem;
   border-radius: 0.5rem;
+  width: 100%;
+  margin-top: 1rem;
 
-  &:hover {
-    background-color: var(--blue-500);
-    color: var(--neutral-0);
-  }
 }

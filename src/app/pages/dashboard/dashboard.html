@@ -3,8 +3,8 @@
     <img src="images/logo_i_notes.svg" alt="logo">
 
     <ul class="options-container">
-      <li (click)="removeFilter()">All Notes</li>
-      <li (click)="setFilter()">Archived Notes</li>
+      <li (click)="removeFilter()"><i class="icon">🏠</i> All Notes</li>
+      <li (click)="setFilter()"><i class="icon">🔐</i> Archived Notes</li>
     </ul>
 
     <hr>
@@ -20,7 +20,7 @@
       <div class="title">All Note</div>
       <section class="header-options">
         <search-notes></search-notes>
-        <button (click)="logout()">➡️</button>
+        <button (click)="logout()"><i class="icon">➡️</i></button>
       </section>
     </section>
 

@@ -1,10 +1,10 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, inject, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
 import {StateService} from '../../services/state/state.service';
 import {Observable} from 'rxjs';
 import {Tag} from '../../domain/models/tag';
 import {PaginationEnum} from '../../domain/enums/pagination.enum';
-import {NoteCard} from '../note-card/note-card';
 import {PushPipe} from '@ngrx/component';
+import {FilterService} from '../../services/local/filter.service';
 
 @Component({
   selector: 'tags-list',
@@ -12,7 +12,6 @@ import {PushPipe} from '@ngrx/component';
   styleUrl: './tags-list.scss',
   standalone: true,
   imports: [
-    NoteCard,
     PushPipe
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -27,6 +26,7 @@ export class TagsList implements OnInit {
   public searchQuery: string;
 
   private stateService: StateService = inject(StateService);
+  private filterService: FilterService = inject(FilterService);
 
   constructor() {
     this.tagsState$ = this.stateService.storedTags();
@@ -62,6 +62,10 @@ export class TagsList implements OnInit {
         search_query: this.searchQuery
       }
     );
+  }
+
+  public selectTag(tag: Tag | undefined): void {
+    this.filterService.setFilterTagId(tag?.id.toString() || '')
   }
 
   private initTotalPagesSubscriptions(): void {

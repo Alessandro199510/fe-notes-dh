@@ -25,4 +25,25 @@ export class FilterService {
       queryParamsHandling: 'merge'
     });
   }
+
+  public getFilterTagId(): string {
+    return this.route.snapshot.queryParamMap.get('tagId') || '';
+  }
+
+  public setFilterTagId(id: string | null): void {
+    const currentId: string | null = this.getFilterTagId();
+    if (currentId == null || currentId != id) {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {tagId: id},
+        queryParamsHandling: 'merge'
+      });
+    } else {
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: {tagId: null},
+        queryParamsHandling: 'merge'
+      })
+    }
+  }
 }
